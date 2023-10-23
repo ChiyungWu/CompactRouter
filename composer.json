@@ -1,0 +1,21 @@
+{
+    "name": "chiyungwu/compact-router",
+    "description": "A PHP Compact Router.",
+    "type": "library",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ChiyungWu\\CompactRouter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Chiyung Wu",
+            "email": "chiyung579@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}

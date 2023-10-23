@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Temp Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        var RenderID = document.getElementById('root');
+        var Split = (window.location.href).split('/')
+        var Page = Split[Split.length - 1];
+        RenderID.innerHTML = '<b><u>Client Script Render</u></b> Content of "' + Page + '"';
+    </script>
+</body>
+</html>

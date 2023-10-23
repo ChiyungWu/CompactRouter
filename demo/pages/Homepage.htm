@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Homepage</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function cf_ApiFetch(apiUrl, MEB_ID, ResApiID)
+        {
+            fetch(apiUrl,
+                {method:'POST'
+                ,headers:
+                    {'Accept': 'application/json'
+                    ,'Content-Type': 'application/json'
+                    }
+                ,body: JSON.stringify(
+                    {MEB_ID: MEB_ID,
+                    })
+                })
+                .then(function(rt)
+                    {
+                        var rx = rt.text();
+                        console.log(rx);
+                        return(rx);
+                    })
+                .then(function(rx)
+                    {
+                        var rj = JSON.parse(rx);
+                        var divText = document.getElementById(ResApiID);
+                        divText.innerHTML = ''
+                            +'<div>'
+                            + rj.msg
+                            + '</div>'
+                            +'<div>'
+                            + '@'
+                            + rj.timestart
+                            + '</div>'
+                            ;
+                    });
+        }
+        function cf_ApiC()
+        {
+            var apiUrl = './api/C/Member';
+            cf_ApiFetch(apiUrl, '', 'ResApiC');
+        }
+        function cf_ApiR1()
+        {
+            var apiUrl = './api/R1/Member';
+            var inputID = document.getElementById('ApiR1');
+            cf_ApiFetch(apiUrl, inputID.value, 'ResApiR1');
+        }
+        function cf_ApiU()
+        {
+            var apiUrl = './api/U/Member';
+            var inputID = document.getElementById('ApiU');
+            cf_ApiFetch(apiUrl, inputID.value, 'ResApiU');
+        }
+        function cf_ApiD()
+        {
+            var apiUrl = './api/D/Member';
+            var inputID = document.getElementById('ApiD');
+            cf_ApiFetch(apiUrl, inputID.value, 'ResApiD');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        button {
+            cursor: pointer;
+            height: 26px;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #aac;
+        }
+        input {
+            height: 20px;
+            padding-left: 8px;
+            border-radius: 4px;
+        }
+        hr {
+            margin: 24px auto;
+            max-width: 92%;
+        }
+        .title {
+            margin: 16px 8px;
+            padding: 16px;
+            border: #000 solid 4px;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .content {
+            margin: auto;
+            font-weight: 700;
+            max-width: 600px;
+        }
+        .div-api {
+            border: #000 solid 1px;
+            margin: 8px 16px;
+            padding: 16px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .div-child2 {
+            margin-top: 8px;
+        }
+        .div-res {
+            margin-top: 8px;
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="title">
+            Compact Router Test Page
+        </div>
+        <div class="div-api">Test "CSR Page1" <button onclick="window.open('./ClientPage1', '_blank');">OPEN</button></div>
+        <div class="div-api">Test "CSR Page2" <button onclick="window.open('./ClientPage2', '_blank');">OPEN</button></div>
+        <div class="div-api">Test "SSR Page1" <button onclick="window.open('./WebPage1', '_blank');">OPEN</button></div>
+        <div class="div-api">Test "SSR Page2" <button onclick="window.open('./WebPage2', '_blank');">OPEN</button></div>
+        <hr>
+        <div class="div-api">
+            <div>Test "C:Insert" Member</div>
+            <div class="div-child2">
+                <input type="text" placeholder="Not Used: Read Only" readonly style="background-color: #ddd;">
+                <button onclick="cf_ApiC();">GO</button>
+            </div>
+            <div id="ResApiC" class="div-res"></div>
+        </div>
+        <div class="div-api">
+            <div>Test "R:Select" Member</div>
+            <div class="div-child2">
+                <input type="text" name="MEB_ID" id="ApiR1" placeholder="Insert Any Member ID">
+                <button onclick="cf_ApiR1();">GO</button>
+            </div>
+            <div id="ResApiR1" class="div-res"></div>
+        </div>
+        <div class="div-api">
+            <div>Test "U:Update" Member</div>
+            <div class="div-child2">
+                <input type="text" name="MEB_ID" id="ApiU" placeholder="Insert Any Member ID">
+                <button onclick="cf_ApiU();">GO</button>
+            </div>
+            <div id="ResApiU" class="div-res"></div>
+        </div>
+        <div class="div-api">
+            <div>Test "D:Delete" Member</div>
+            <div class="div-child2">
+                <input type="text" name="MEB_ID" id="ApiD" placeholder="Insert Any Member ID">
+                <button onclick="cf_ApiD();">GO</button>
+            </div>
+            <div id="ResApiD" class="div-res"></div>
+        </div>
+    </div>
+</body>
+</html>
